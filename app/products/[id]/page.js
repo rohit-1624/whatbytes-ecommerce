@@ -19,7 +19,6 @@ export default function ProductDetailPage() {
     <div className="bg-gray-100 min-h-screen flex justify-center items-center py-12">
       <div className="bg-white rounded-lg shadow-lg border w-10/12 grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
         
-        {/* Left: Image */}
         <div className="flex justify-center items-center">
           <img
             src={product.image}
@@ -28,11 +27,9 @@ export default function ProductDetailPage() {
           />
         </div>
 
-        {/* Right: Details */}
         <div className="flex flex-col space-y-6">
           <h1 className="font-bold text-4xl">{product.title}</h1>
 
-          {/* Rating */}
           <div className="flex gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
@@ -47,20 +44,16 @@ export default function ProductDetailPage() {
             ))}
           </div>
 
-          {/* Price */}
           <p className="text-3xl font-semibold text-gray-800">
             ${product.price}
           </p>
 
-          {/* Description */}
           <p className="text-gray-600">{product.desc}</p>
 
-          {/* Category */}
           <span className="bg-blue-600 px-4 py-1 rounded text-white capitalize font-medium w-fit">
             {product.category}
           </span>
 
-          {/* Quantity Selector */}
           <div className="flex items-center gap-4">
             <label className="font-semibold">Quantity:</label>
             <button
@@ -78,7 +71,6 @@ export default function ProductDetailPage() {
             </button>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex gap-4">
             <button className="bg-rose-600 px-6 py-2 rounded text-white font-semibold">
               Add to Cart
@@ -88,7 +80,6 @@ export default function ProductDetailPage() {
             </button>
           </div>
 
-          {/* Optional Reviews Section */}
           <div className="mt-6 border-t pt-4">
             <h2 className="font-bold text-xl mb-2">Customer Reviews</h2>
             <p className="text-gray-500 italic">No reviews yet.</p>

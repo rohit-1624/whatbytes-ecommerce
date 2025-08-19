@@ -1,5 +1,6 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo } from "react";  
+import Link from "next/link";
 import { ShoppingCart, Search } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setSearchQuery } from "@/redux/slices/productSlice";
@@ -17,12 +18,10 @@ const Header = ({ cartCount = 0 }) => {
     <header className="w-full">
       <div className="bg-gradient-to-r from-blue-700 to-blue-900">
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
-          {/* Logo */}
           <div className="text-white font-semibold text-2xl tracking-wide select-none">
             Logo
           </div>
 
-          {/* Search */}
           <div className="flex-1 flex justify-center">
             <div className="relative w-full max-w-xl">
               <span className="absolute left-3 top-1/2 -translate-y-1/2">
@@ -40,7 +39,8 @@ const Header = ({ cartCount = 0 }) => {
             </div>
           </div>
 
-          {/* Cart */}
+          
+          <Link href="/cart">
           <button
             type="button"
             className="relative inline-flex items-center gap-2 rounded-lg px-4 py-2
@@ -64,6 +64,7 @@ const Header = ({ cartCount = 0 }) => {
               </span>
             )}
           </button>
+          </Link>
         </div>
       </div>
     </header>

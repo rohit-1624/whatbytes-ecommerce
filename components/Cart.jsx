@@ -7,7 +7,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.cart.products || []);
 
-  // Update product quantity
   const handleQuantityChange = (id, e) => {
     const qty = parseInt(e.target.value);
     if (qty > 0) {
@@ -15,12 +14,10 @@ const Cart = () => {
     }
   };
 
-  // Remove product
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
   };
 
-  // Total price
   const totalPrice = products.reduce(
     (sum, product) => sum + product.price * product.quantity,
     0
@@ -41,7 +38,6 @@ const Cart = () => {
                 key={product.id}
                 className="flex justify-between items-center p-4 border rounded-lg shadow"
               >
-                {/* Product Info */}
                 <div className="flex items-center gap-4">
                   <img
                     src={product.image}

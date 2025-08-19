@@ -29,7 +29,6 @@ const productSlice = createSlice({
 
 export const { setSelectedProduct, setSearchQuery } = productSlice.actions;
 
-// ✅ Safe selector (agar galti se key `product` ho to bhi handle ho jaye)
 export const selectFilteredProducts = (state) => {
   const slice = state.products ?? state.product ?? initialState;
   const query = (slice.searchQuery || "").toLowerCase();

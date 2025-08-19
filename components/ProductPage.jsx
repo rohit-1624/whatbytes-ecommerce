@@ -18,7 +18,6 @@ const ProductPage = () => {
 
   const searchedProducts = useSelector(selectFilteredProducts);
 
-  // Extra filter category + price
   const filteredProducts = searchedProducts.filter(
     (p) => (category === "All" || p.category === category) && p.price <= price[0]
   );
@@ -35,9 +34,7 @@ const ProductPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4">
-      {/* Sidebar */}
       <div className="md:w-3/12 flex flex-col gap-12 ">
-        {/* Filters */}
         <div className="bg-blue-600 text-white p-4 rounded-2xl">
           <h2 className="text-lg font-semibold mb-4">Filters</h2>
 
@@ -116,7 +113,6 @@ const ProductPage = () => {
                   <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
                   <p className="text-gray-700 mb-2">₹{product.price}</p>
 
-                  {/* Rating */}
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
