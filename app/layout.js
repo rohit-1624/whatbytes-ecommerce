@@ -1,5 +1,5 @@
 import "./globals.css";
-// import "remixicon/fonts/remixicon.css";
+import { Providers } from "../redux/Providers";
 import Header from "../components/Header";
 
 export const metadata = {
@@ -10,9 +10,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-white">
-        <Header />
-        <main className="pt-0">{children}</main>
+      <body>
+        <Providers>
+          <Header />
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );
