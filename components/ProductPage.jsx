@@ -1,18 +1,21 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";   
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 import { Star, ShoppingCart } from "lucide-react";
-import { useSelector } from "react-redux";
-import { selectFilteredProducts } from "@/redux/slices/productSlice";  // 👈 selector import
+import { useSelector, useDispatch } from "react-redux";
+import { selectFilteredProducts } from "@/redux/slices/productSlice";
+import { addToCart } from "@/redux/slices/cartSlice";
 
 const ProductPage = () => {
+  const dispatch = useDispatch();
   const [category, setCategory] = useState("All");
   const [price, setPrice] = useState([1000]);
 
   const categories = ["All", "Electronics", "Clothing", "Home", "Footwear"];
   const brands = ["Nike", "Adidas", "Samsung", "Apple"];
 
-  // 👇 Redux se products laa rahe hain (already search filter apply hai)
   const searchedProducts = useSelector(selectFilteredProducts);
 
   // Extra filter category + price
@@ -20,10 +23,21 @@ const ProductPage = () => {
     (p) => (category === "All" || p.category === category) && p.price <= price[0]
   );
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+
+    Swal.fire({
+    icon: "success",
+    title: "Added to Cart",
+    text: `${product.title} has been added to your cart.`,
+  });
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4">
       {/* Sidebar */}
       <div className="md:w-3/12 flex flex-col gap-12 ">
+        {/* Filters */}
         <div className="bg-blue-600 text-white p-4 rounded-2xl">
           <h2 className="text-lg font-semibold mb-4">Filters</h2>
 
@@ -87,31 +101,45 @@ const ProductPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-x-25 space-y-12">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <Link key={product.id} href={`/products/${product.id}`}>
-                <div className="bg-white w-60 shadow rounded-2xl overflow-hidden flex flex-col cursor-pointer hover:scale-105 transition">
-                  <img src={product.image} alt={product.title} className="h-40 w-full object-cover" />
-                  <div className="p-4 flex flex-col flex-1">
-                    <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
-                    <p className="text-gray-700 mb-2">${product.price}</p>
+              <div
+                key={product.id}
+                className="bg-white w-60 shadow rounded-2xl overflow-hidden flex flex-col cursor-pointer hover:scale-105 transition"
+              >
+                <Link href={`/products/${product.id}`}>
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="h-40 w-full object-cover"
+                  />
+                </Link>
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
+                  <p className="text-gray-700 mb-2">₹{product.price}</p>
 
-                    {/* Rating */}
-                    <div className="flex gap-1 mb-4">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className={`${i < product.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                        />
-                      ))}
-                    </div>
-
-                    {/* Add to Cart */}
-                    <button className="mt-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
-                      <ShoppingCart size={18} /> Add to Cart
-                    </button>
+                  {/* Rating */}
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={16}
+                        className={`${
+                          i < product.rating
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
                   </div>
+
+                  {/* Add to Cart */}
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="mt-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition"
+                  >
+                    <ShoppingCart size={18} /> Add to Cart
+                  </button>
                 </div>
-              </Link>
+              </div>
             ))
           ) : (
             <p className="text-gray-500">No products found.</p>
