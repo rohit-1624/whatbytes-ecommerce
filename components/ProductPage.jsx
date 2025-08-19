@@ -1,33 +1,29 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";   // 👈 yeh import karo
+import Link from "next/link";   
 import { Star, ShoppingCart } from "lucide-react";
+import { useSelector } from "react-redux";
+import { selectFilteredProducts } from "@/redux/slices/productSlice";  // 👈 selector import
 
 const ProductPage = () => {
   const [category, setCategory] = useState("All");
   const [price, setPrice] = useState([1000]);
 
-  const categories = ["All", "Electronics", "Clothing", "Home"];
+  const categories = ["All", "Electronics", "Clothing", "Home", "Footwear"];
   const brands = ["Nike", "Adidas", "Samsung", "Apple"];
 
-const products = [
-  { id: 1, title: "Running Shoes", price: 99, category: "Footwear", image: "/images/shoes.avif", rating: 4, desc: "Comfortable running shoes for everyday use." },
-  { id: 2, title: "Wireless Headphones", price: 429, category: "Electronics", image: "/images/headphone.avif", rating: 5, desc: "Noise-cancelling headphones with long battery life." },
-  { id: 3, title: "Backpack", price: 129, category: "Home", image: "/images/backpack.avif", rating: 3, desc: "Durable backpack suitable for travel and work." },
-  { id: 4, title: "SmartWatch", price: 249, category: "Electronics", image: "/images/smartwatch.avif", rating: 4, desc: "Smartwatch with health tracking features." },
-  { id: 5, title: "Smartphone", price: 699, category: "Electronics", image: "/images/smartphone.avif", rating: 5, desc: "Latest smartphone with high-performance camera." },
-  { id: 6, title: "Digital Camera", price: 499, category: "Electronics", image: "/images/camera.jfif", rating: 4, desc: "High resolution digital camera for photography." },
-  { id: 7, title: "T-shirt", price: 29, category: "Clothing", image: "/images/tshirt.avif", rating: 4, desc: "Casual cotton t-shirt available in multiple sizes." }
-];
+  // 👇 Redux se products laa rahe hain (already search filter apply hai)
+  const searchedProducts = useSelector(selectFilteredProducts);
 
-  const filteredProducts = products.filter(
+  // Extra filter category + price
+  const filteredProducts = searchedProducts.filter(
     (p) => (category === "All" || p.category === category) && p.price <= price[0]
   );
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4">
-      {/* Sidebar ... (same as your code) */}
- <div className="md:w-3/12 flex flex-col gap-12 ">
+      {/* Sidebar */}
+      <div className="md:w-3/12 flex flex-col gap-12 ">
         <div className="bg-blue-600 text-white p-4 rounded-2xl">
           <h2 className="text-lg font-semibold mb-4">Filters</h2>
 
@@ -69,8 +65,6 @@ const products = [
           </div>
         </div>
 
-
-
         {/* Brand */}
         <div className="bg-white text-black p-4 rounded-2xl">
           <div>
@@ -86,38 +80,42 @@ const products = [
           </div>
         </div>
       </div>
-      
+
       {/* Main Product Grid */}
       <div className="md:w-9/12 ml-8">
         <p className="text-black text-xl font-bold mb-8">Product Listing</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-x-28 space-y-14">
-          {filteredProducts.map((product) => (
-            <Link key={product.id} href={`/products/${product.id}`}>
-              <div className="bg-white w-60 shadow rounded-2xl overflow-hidden flex flex-col cursor-pointer hover:scale-105 transition">
-                <img src={product.image} alt={product.title} className="h-40 w-full object-cover" />
-                <div className="p-4 flex flex-col flex-1">
-                  <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
-                  <p className="text-gray-700 mb-2">${product.price}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-x-25 space-y-12">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <Link key={product.id} href={`/products/${product.id}`}>
+                <div className="bg-white w-60 shadow rounded-2xl overflow-hidden flex flex-col cursor-pointer hover:scale-105 transition">
+                  <img src={product.image} alt={product.title} className="h-40 w-full object-cover" />
+                  <div className="p-4 flex flex-col flex-1">
+                    <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
+                    <p className="text-gray-700 mb-2">${product.price}</p>
 
-                  {/* Rating */}
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        className={`${i < product.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                      />
-                    ))}
+                    {/* Rating */}
+                    <div className="flex gap-1 mb-4">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          size={16}
+                          className={`${i < product.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Add to Cart */}
+                    <button className="mt-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
+                      <ShoppingCart size={18} /> Add to Cart
+                    </button>
                   </div>
-
-                  {/* Add to Cart */}
-                  <button className="mt-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
-                    <ShoppingCart size={18} /> Add to Cart
-                  </button>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          ) : (
+            <p className="text-gray-500">No products found.</p>
+          )}
         </div>
       </div>
     </div>

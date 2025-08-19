@@ -1,21 +1,28 @@
 "use client";
 import { useMemo } from "react";
 import { ShoppingCart, Search } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { setSearchQuery } from "@/redux/slices/productSlice";
 
 const Header = ({ cartCount = 0 }) => {
-  // clamp badge (no negative)
+  const dispatch = useDispatch();
+
   const count = useMemo(() => Math.max(0, Number(cartCount) || 0), [cartCount]);
+
+  const handleSearch = (e) => {
+    dispatch(setSearchQuery(e.target.value));
+  };
 
   return (
     <header className="w-full">
       <div className="bg-gradient-to-r from-blue-700 to-blue-900">
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
-          {/* Logo (left) */}
+          {/* Logo */}
           <div className="text-white font-semibold text-2xl tracking-wide select-none">
             Logo
           </div>
 
-          {/* Center search (kept centered using flex grow + max width) */}
+          {/* Search */}
           <div className="flex-1 flex justify-center">
             <div className="relative w-full max-w-xl">
               <span className="absolute left-3 top-1/2 -translate-y-1/2">
@@ -25,6 +32,7 @@ const Header = ({ cartCount = 0 }) => {
                 type="text"
                 placeholder="Search for products..."
                 aria-label="Search products"
+                onChange={handleSearch}
                 className="w-full rounded-lg bg-white/10 placeholder-white/80 text-white
                            pl-10 pr-4 py-2 outline-none border border-white/30
                            focus:border-white/60 focus:ring-0"
@@ -32,7 +40,7 @@ const Header = ({ cartCount = 0 }) => {
             </div>
           </div>
 
-          {/* Cart (right) */}
+          {/* Cart */}
           <button
             type="button"
             className="relative inline-flex items-center gap-2 rounded-lg px-4 py-2
