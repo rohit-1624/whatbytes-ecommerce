@@ -13,7 +13,8 @@ The project is a responsive e-commerce web app built with **Next.js, React, and 
 ## ✨ Features
 - 🛍️ **Product Listing Page** – Displays all available products.  
 - 📄 **Dynamic Product Details Page** – Clicking a product shows detailed info.  
-- 🛒 **Add to Cart** – Products can be added/removed from cart.  
+- 🛒 **Add to Cart** – Products can be added/removed from cart.
+- - 🔎 **Product Filtering** – Filter products by **category, price, or type** for better browsing.  
 - 🔔 **SweetAlert2 Notifications** – User feedback on cart actions.  
 - 🖥️ **Responsive Design** – Works smoothly on desktop, tablet, and mobile.  
 
