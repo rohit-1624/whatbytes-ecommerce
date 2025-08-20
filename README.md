@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛒 WhatBytes E-commerce Assignment
 
-## Getting Started
+The project is a responsive e-commerce web app built with **Next.js, React, and Tailwind CSS**.
 
-First, run the development server:
+---
 
+## 🔗 Live Demo
+- **Vercel Deployment:** [Click Here](https://whatbytes-ecommerce-nine.vercel.app/)  
+- **Video Walkthrough:** [Watch Here](https://drive.google.com/file/d/1vaAib5JDnXGcttbCik_Rg4v7lz6rm-zn/view)  
+
+---
+
+## ✨ Features
+- 🛍️ **Product Listing Page** – Displays all available products.  
+- 📄 **Dynamic Product Details Page** – Clicking a product shows detailed info.  
+- 🛒 **Add to Cart** – Products can be added/removed from cart.  
+- 🔔 **SweetAlert2 Notifications** – User feedback on cart actions.  
+- 🖥️ **Responsive Design** – Works smoothly on desktop, tablet, and mobile.  
+
+---
+
+## ⚙️ Tech Stack
+- **Framework:** Next.js (React)  
+- **Styling:** Tailwind CSS  
+- **State Management:** Redux Toolkit  
+- **Alerts/Notifications:** SweetAlert2  
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+git clone https://github.com/rohit-1624/whatbytes-ecommerce.git
+cd whatbytes-ecommerce
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
