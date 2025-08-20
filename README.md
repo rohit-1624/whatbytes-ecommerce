@@ -34,3 +34,11 @@ The project is a responsive e-commerce web app built with **Next.js, React, and 
 git clone https://github.com/rohit-1624/whatbytes-ecommerce.git
 cd whatbytes-ecommerce
 
+npm install
+
+npm run dev
+
+Open in browser
+```
+Now open http://localhost:3000
+ in your browser to view the app.
