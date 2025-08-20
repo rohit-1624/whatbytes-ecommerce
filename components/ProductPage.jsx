@@ -49,7 +49,7 @@ const ProductPage = () => {
                     value={cat}
                     checked={category === cat}
                     onChange={() => setCategory(cat)}
-                    className="accent-white"
+                    className="accent-gray-900"
                   />
                   <span>{cat}</span>
                 </label>
